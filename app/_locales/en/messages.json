@@ -1,0 +1,10 @@
+{
+    "appName": {
+        "message": "remarker",
+        "description": "The name of the application"
+    },
+    "appDescription": {
+        "message": "Markdown Presentation Editor",
+        "description": "The description of the application"
+    }
+}
