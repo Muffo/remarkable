@@ -1,6 +1,9 @@
 {
-  "name": "remarker",
+  "name": "remarkable",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "remark": "~0.7.0"
+  },
   "devDependencies": {}
 }
