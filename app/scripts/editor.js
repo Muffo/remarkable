@@ -30,10 +30,10 @@ $(document).ready(function() {
 			console.log("Editor init");
 			this.initBindings();
 			this.fitHeight();
-			//this.restoreState(function() {
-			//	editor.convertMarkdown();
-			//	editor.onloadEffect(1);
-			//});
+			this.restoreState(function() {
+				editor.convertMarkdown();
+				editor.onloadEffect(1);
+			});
 		},
 
 		// Handle events on several DOM elements
@@ -84,10 +84,7 @@ $(document).ready(function() {
 		restoreState: function(c) {
 			app.restoreState(function(restoredItems) {
 				if (restoredItems.markdown) editor.markdownSource.val(restoredItems.markdown);
-				if (restoredItems.isAutoScrolling == "y") editor.toggleFeature("auto-scroll");
 				if (restoredItems.isFullscreen == "y") editor.toggleFeature("fullscreen");
-				editor.switchToPanel(restoredItems.activePanel || "preview");
-
 				c();
 			});
 		},

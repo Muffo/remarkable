@@ -53,11 +53,10 @@ $(document).ready(function() {
 				this.markdownPreviewIframeLoadEventCallbacks.add(function() {
 					app.restoreState(c);
 				});
-	
 				return;
 			}
 	
-			chrome.storage.local.get(["markdown", "isAutoScrolling", "isFullscreen", "activePanel"], c);
+			chrome.storage.local.get(["markdown", "isFullscreen"], c);
 		},
 	
 		// Update the preview panel with new HTML
