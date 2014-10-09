@@ -17,50 +17,45 @@
     <body>
         <!-- Fixed navbar -->
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Remarker</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">New</a></li>
-                                <li><a href="#">Open...</a></li>
-                                <li><a href="#">Save</a></li>
-                                <li><a href="#">Save As...</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Close</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Bold</a></li>
-                                <li><a href="#">Italic</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Show/Hide Editor</a></li>
-                                <li><a href="#">Show/Hide Preview</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">View mode</li>
-                                <li><a href="#">Full Screen</a></li>
-                                <li><a href="#">Window</a></li>
-                            </ul>
-                        </li>
+            <ul class="nav navbar-nav">
+                <a class="navbar-brand" href="#">Remarkable</a>
+                <li>
+                    <a id="save" href"#save"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                </li>
+                <li>
+                    <a id="open" href"#save">Open</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">File <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">New</a></li>
+                        <li><a href="#">Open...</a></li>
+                        <li><a href="#">Save</a></li>
+                        <li><a href="#">Save As...</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Close</a></li>
                     </ul>
-                </div><!--/.nav-collapse -->
-            </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Bold</a></li>
+                        <li><a href="#">Italic</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">View <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Show/Hide Editor</a></li>
+                        <li><a href="#">Show/Hide Preview</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">View mode</li>
+                        <li><a href="#">Full Screen</a></li>
+                        <li><a href="#">Window</a></li>
+                    </ul>
+                </li>
+            </ul>
+        
         </div>
 
         <div id="left-column">
