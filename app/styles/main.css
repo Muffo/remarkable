@@ -8,12 +8,6 @@ body {
 	overflow: hidden;
 }
 
-/* Decrease size of Bootstrap navbar */
-.navbar-nav > li > a, .navbar-brand {padding-top:7px !important; padding-bottom:5px !important;}
-.navbar {min-height:32px !important; margin-bottom: 0px !important!; }
-.navbar-static-top { height: 25px; }
-
-
 #left-column,
 #right-column {
 	float: left;
