@@ -28,21 +28,60 @@ $(window).on('load', function() {
     removePreview = function() {
         $('.remark-container').removeClass('remark-container');
         $('div[class|="remark"]').remove();
+    },
+
+    calcSlideNumber = function(markdown, caretPosition) {
+        // Consider the text before the caret
+        markdown = markdown.substring(0, caretPosition);
+
+        // Remove all the code
+        markdown = markdown.replace(/```[^`]*```/g, "");
+
+        console.log(markdown);
+
+        // Slide numeration start from 1
+        var slideNumber = 1;
+
+        // Look for separators '---' and incremental separators '--'
+        var separators = markdown.match(/\n---?\n/g);
+        if (separators) {
+            slideNumber += separators.length;
+        }
+
+        // Remove layout slides
+        var layouSlides = markdown.match(/\nlayout: true/g);
+        if (layouSlides) {
+            slideNumber -= layouSlides.length;
+        }
+
+        return slideNumber;
     };
     
     $(window).on({
         resize: postHeight,
 
         // Listen to messages coming from the parent window
-        // Currently only used to transfer HTML from the parent window to the iframe for display
         message: function(e) {
+            var request = e.originalEvent.data;
+            if (request.hasOwnProperty('action')) {
+                if (request.action === 'updateMarkdownPreview') {
+                    var markdown = request.markdown;
+                    var caretPosition = request.caretPosition;
+                    var slideNumber = calcSlideNumber(markdown, caretPosition);
+                   
+                    removePreview();
+                    slideshow = remark.create({
+                        source: markdown
+                    });
+                    slideshow.gotoSlide(slideNumber);
+                }
+                else {
+                    throw new "Invalid request";
+                }
+                
+            }
 
-            var source = e.originalEvent.data;
-            removePreview();
-
-            slideshow = remark.create({
-                source: source
-            });
+            
         }
     });
     
