@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>remarker</title>
+        <title>Remarker</title>
 
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -14,15 +15,62 @@
         <!-- endbuild -->
     </head>
     <body>
-        <h1>'Allo</h1>
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Remarkable</a>
+            </div>
+
+            <button type="button" class="btn btn-default navbar-btn">
+                <span class="glyphicon glyphicon-floppy-disk"></span>
+            </button>
+            <button type="button" class="btn btn-default navbar-btn">
+                <span class="glyphicon glyphicon-share"></span>
+            </button>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default navbar-btn active">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button type="button" class="btn btn-default navbar-btn">
+                    <span class="glyphicon glyphicon-film"></span>
+                </button>
+                <button type="button" class="btn btn-default navbar-btn">
+                    <span class="glyphicon glyphicon-comment"></span>
+                </button>
+            </div>
+            <button type="button" class="btn btn-default navbar-btn">
+                <span class="glyphicon glyphicon-fullscreen"></span>
+            </button>
+            <button type="button" class="btn btn-info navbar-btn navbar-right">
+                <span class="glyphicon glyphicon-question-sign"></span>
+            </button>
+            
+        </div>
+    
+        <div id="left-column">
+            <textarea id="markdown" class="full-height" placeholder="Markdown Code">
+            </textarea>
+        </div>
+        <div id="right-column" class="full-height">
+            <iframe src="preview.html" id="preview-iframe" class="full-height"> </iframe>
+        </div>
+
+        
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
+
         <!-- build:js scripts/index.js -->
+        <script src="scripts/samples.js"></script>
+        <script src="scripts/editor.js"></script>
         <script src="scripts/index.js"></script>
         <!-- endbuild -->
+
     </body>
 </html>
