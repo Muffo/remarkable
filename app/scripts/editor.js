@@ -1,6 +1,6 @@
 /*global $:false, editor:true, app:false*/
 
-'use strict';
+// 'use strict';
   
 $(document).ready(function() {
 
@@ -69,7 +69,6 @@ $(document).ready(function() {
 			var newHeight = $(window).height() - this.topPanel.outerHeight();
 			this.fitHeightElements.each(function() {
 				var t = $(this);
-				console.log(t);
 				t.css({ height: newHeight +'px' });
 			});
 		},

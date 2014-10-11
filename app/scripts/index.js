@@ -1,6 +1,6 @@
 /*global $:false, app:true, editor:false*/
 
-'use strict';
+// 'use strict';
  
 $(document).ready(function() {
 	app = {
