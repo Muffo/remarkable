@@ -1,4 +1,4 @@
-/*global $:false, editor:true, app:false*/
+/*global $:false, editor:true, app:false, samples:false*/
 
 // 'use strict';
   
@@ -28,7 +28,7 @@ $(document).ready(function() {
 			this.initBindings();
 			this.fitHeight();
 			this.restoreState(function() {
-				editor.convertMarkdown();
+				editor.processMarkdown();
 				editor.onloadEffect(1);
 				this.fitHeight();
 			});
@@ -55,7 +55,7 @@ $(document).ready(function() {
 				},
 				'change.editor': function() {
 					editor.save('markdown', editor.markdownSource.val());
-					editor.convertMarkdown();
+					editor.processMarkdown();
 				}
 			});
 			this.markdownTargetsTriggers.on('click', function(e) {
@@ -84,6 +84,9 @@ $(document).ready(function() {
 				if (restoredItems.markdown) {
 					editor.markdownSource.val(restoredItems.markdown);
 				}
+				else {
+					editor.markdownSource.val(samples.remarkPresentation);
+				}
 				if (restoredItems.isFullscreen === 'y') {
 					editor.toggleFeature('fullscreen');
 				}
@@ -91,8 +94,8 @@ $(document).ready(function() {
 			});
 		},
 
-		// Convert Markdown to HTML using showdown.js
-		convertMarkdown: function() {
+		// Process the Markdown code and update the preview
+		processMarkdown: function() {
 			var markdown = this.markdownSource.val();
 			app.updateMarkdownPreview(markdown);
 			this.markdownPreview.trigger('updated.editor');
