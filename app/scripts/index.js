@@ -61,8 +61,13 @@ $(document).ready(function() {
 		},
 	
 		// Update the preview panel with new HTML
-		updateMarkdownPreview: function(markdown) {
-			this.postMessage(markdown);
+		updateMarkdownPreview: function(markdown, caretPosition) {
+			var request = {
+				action: 'updateMarkdownPreview',
+				caretPosition: caretPosition,
+				markdown: markdown
+			}
+			this.postMessage(request);
 		},
 	
 		updateMarkdownPreviewIframeHeight: function(height) {

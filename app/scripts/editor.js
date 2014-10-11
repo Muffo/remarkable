@@ -53,13 +53,13 @@ $(document).ready(function() {
 						editor.markdownSource.trigger('change.editor');
 					}, 0);
 				},
-				'change.editor': function() {
-					editor.save('markdown', editor.markdownSource.val());
-					editor.processMarkdown();
-				},
 				'keydown click focus': function() {
-    				console.log("Current position: " + editor.markdownSource.caret());
-				}
+					editor.markdownSource.trigger('change.editor');
+				},
+				'change.editor': function() {
+					editor.processMarkdown();
+					editor.save('markdown', editor.markdownSource.val());
+				},
 			});
 			this.markdownTargetsTriggers.on('click', function(e) {
 				e.preventDefault();
@@ -100,7 +100,10 @@ $(document).ready(function() {
 		// Process the Markdown code and update the preview
 		processMarkdown: function() {
 			var markdown = this.markdownSource.val();
-			app.updateMarkdownPreview(markdown);
+
+			// Space for other operations on the MD before updating the preview
+			var caretPosition = editor.markdownSource.caret();
+			app.updateMarkdownPreview(markdown, caretPosition);
 			this.markdownPreview.trigger('updated.editor');
 		},
 
