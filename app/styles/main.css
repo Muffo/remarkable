@@ -8,6 +8,10 @@ body {
 	overflow: hidden;
 }
 
+.navbar {
+	margin-bottom: 0px;
+}
+
 #left-column,
 #right-column {
 	float: left;
