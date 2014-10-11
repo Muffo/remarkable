@@ -60,14 +60,26 @@ $(document).ready(function() {
 			chrome.storage.local.get(['markdown', 'isFullscreen'], c);
 		},
 	
-		// Update the preview panel with new HTML
+		// A timer is used to avoid a burst of requests
+		updateTimeout: null,
+
+		// Update the preview panel with new markdown
 		updateMarkdownPreview: function(markdown, caretPosition) {
+
+			// Remove the previous request of update
+			if (this.updateTimeout !== null) {
+				clearTimeout(this.updateTimeout)
+			}
 			var request = {
 				action: 'updateMarkdownPreview',
 				caretPosition: caretPosition,
 				markdown: markdown
 			}
-			this.postMessage(request);
+
+			// Schedule the next update
+			this.updateTimeout = setTimeout(function() {
+				app.postMessage(request);
+			}, 200);
 		},
 	
 		updateMarkdownPreviewIframeHeight: function(height) {
