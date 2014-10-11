@@ -1,28 +1,27 @@
-/*global $:false*/
+/*global $:false, app:true, editor:false*/
 
-// 'use strict';
+'use strict';
  
 $(document).ready(function() {
 	app = {
 	
 		// Chrome app variables
-		markdownPreviewIframe: $("#preview-iframe"),
+		markdownPreviewIframe: $('#preview-iframe'),
 		isMarkdownPreviewIframeLoaded: false,
 		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),
 	
 		init: function() {
 			editor.init();
-			console.log(this);
 			this.initBindings();
 		},
 	
 		initBindings: function() {
-			$(window).on("message", function(e) {
+			$(window).on('message', function(e) {
 				app.receiveMessage(e.originalEvent);
 			});
 	
 			// In the Chrome app, the preview panel requires to be in a sandboxed iframe, hence isn't loaded immediately with the rest of the document
-			this.markdownPreviewIframe.on("load", function() {
+			this.markdownPreviewIframe.on('load', function() {
 				app.isMarkdownPreviewIframeLoaded = true;
 				app.markdownPreviewIframeLoadEventCallbacks.fire();
 			});
@@ -31,12 +30,14 @@ $(document).ready(function() {
 		// Post messages to the iframe
 		// Currently only used to transfer HTML from this window to the iframe for display
 		postMessage: function(data) {
-			this.markdownPreviewIframe[0].contentWindow.postMessage(data, "*");
+			this.markdownPreviewIframe[0].contentWindow.postMessage(data, '*');
 		},
 	
 		// Receive messages sent to this window (from the iframe)
 		receiveMessage: function(e) {
-			if (e.data.hasOwnProperty("height")) this.updateMarkdownPreviewIframeHeight(e.data.height);
+			if (e.data.hasOwnProperty('height')) {
+				this.updateMarkdownPreviewIframeHeight(e.data.height);
+			}
 		},
 	
 		// Save a key/value pair in chrome.storage (either Markdown text or enabled features)
@@ -56,7 +57,7 @@ $(document).ready(function() {
 				return;
 			}
 	
-			chrome.storage.local.get(["markdown", "isFullscreen"], c);
+			chrome.storage.local.get(['markdown', 'isFullscreen'], c);
 		},
 	
 		// Update the preview panel with new HTML
@@ -65,8 +66,8 @@ $(document).ready(function() {
 		},
 	
 		updateMarkdownPreviewIframeHeight: function(height) {
-			this.markdownPreviewIframe.css("height", height);
-			editor.markdownPreview.trigger("updated.editor");
+			this.markdownPreviewIframe.css('height', height);
+			editor.markdownPreview.trigger('updated.editor');
 		}
 	};
 
