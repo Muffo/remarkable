@@ -56,6 +56,9 @@ $(document).ready(function() {
 				'change.editor': function() {
 					editor.save('markdown', editor.markdownSource.val());
 					editor.processMarkdown();
+				},
+				'keydown click focus': function() {
+    				console.log("Current position: " + editor.markdownSource.caret());
 				}
 			});
 			this.markdownTargetsTriggers.on('click', function(e) {
