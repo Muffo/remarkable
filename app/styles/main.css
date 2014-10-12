@@ -11,6 +11,17 @@ body {
 .navbar {
 	margin-bottom: 0px;
 	padding-right: 10px;
+	text-align: center;
+}
+
+.navbar-brand {
+	font-family: 'Yanone Kaffeesatz';
+	font-size: 200%;
+}
+
+.nav-center {
+	margin: 0 auto;
+	float: none;
 }
 
 #left-column,
