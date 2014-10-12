@@ -73,13 +73,20 @@ $(window).on('load', function() {
                     });
                     slideshow.gotoSlide(slideNumber);
                 }
+                else if (request.action === 'viewSlides') {
+                    if (body.hasClass('remark-presenter-mode')) {
+                        slideshow.togglePresenterMode();
+                    }
+                }
+                else if (request.action === 'viewPresenter') {
+                    if (!body.hasClass('remark-presenter-mode')) {
+                        slideshow.togglePresenterMode();
+                    }
+                }
                 else {
                     throw new "Invalid request";
-                }
-                
-            }
-
-            
+                }   
+            }            
         }
     });
     

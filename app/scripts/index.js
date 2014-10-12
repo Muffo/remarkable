@@ -5,8 +5,17 @@
 $(document).ready(function() {
 	app = {
 	
-		// Chrome app variables
+		// Main elements
+		leftColumn: $('#left-column'),
+		rightColumn: $('#right-column'),
 		markdownPreviewIframe: $('#preview-iframe'),
+
+		// Navbar elements
+		viewBtns: $('.view-btn'),
+		editViewBtn: $('#edit-view-btn'),
+		slidesViewBtn: $('#slides-view-btn'),
+		presenterViewBtn: $('#presenter-view-btn'),
+		
 		isMarkdownPreviewIframeLoaded: false,
 		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),
 	
@@ -25,6 +34,39 @@ $(document).ready(function() {
 				app.isMarkdownPreviewIframeLoaded = true;
 				app.markdownPreviewIframeLoadEventCallbacks.fire();
 			});
+
+			this.viewBtns.on('click', function(e) {
+				app.viewBtns.removeClass('active');
+
+				var clickedBtn = $(this);
+				clickedBtn.addClass('active');
+			});
+
+			this.editViewBtn.on('click', function(e) {
+				app.leftColumn.show();
+				app.leftColumn.width('50%');
+				app.rightColumn.width('50%');
+				app.postMessage({
+					action: 'viewSlides',
+				});
+			});
+
+			this.slidesViewBtn.on('click', function(e) {
+				app.leftColumn.hide();
+				app.rightColumn.width('100%');
+				app.postMessage({
+					action: 'viewSlides',
+				});
+			});
+
+			this.presenterViewBtn.on('click', function(e) {
+				app.leftColumn.hide();
+				app.rightColumn.width('100%');
+				app.postMessage({
+					action: 'viewPresenter',
+				});
+			});
+
 		},
 	
 		// Post messages to the iframe

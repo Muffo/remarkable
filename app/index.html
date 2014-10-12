@@ -30,13 +30,13 @@
             </button>
 
             <div class="btn-group">
-                <button type="button" class="btn btn-default navbar-btn active">
+                <button type="button" id="edit-view-btn" class="btn btn-default navbar-btn view-btn active">
                     <span class="glyphicon glyphicon-pencil"></span>
                 </button>
-                <button type="button" class="btn btn-default navbar-btn">
+                <button type="button" id="slides-view-btn" class="btn btn-default view-btn navbar-btn">
                     <span class="glyphicon glyphicon-film"></span>
                 </button>
-                <button type="button" class="btn btn-default navbar-btn">
+                <button type="button" id="presenter-view-btn" class="btn btn-default view-btn navbar-btn">
                     <span class="glyphicon glyphicon-comment"></span>
                 </button>
             </div>
@@ -49,10 +49,10 @@
             
         </div>
     
-        <div id="left-column">
+        <div id="left-column" style="width:50%;">
             <textarea id="markdown" class="full-height" placeholder="Markdown Code"></textarea>
         </div>
-        <div id="right-column" class="full-height">
+        <div id="right-column" class="full-height" style="width:50%;">
             <iframe src="preview.html" id="preview-iframe" class="full-height"> </iframe>
         </div>
 

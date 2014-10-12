@@ -16,7 +16,6 @@ body {
 #left-column,
 #right-column {
 	float: left;
-	width: 50%;
 }
 
 #markdown,
