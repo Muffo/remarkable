@@ -34,6 +34,9 @@ body {
 
 #markdown {
 	padding: 15px;
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;;
+	font-size: 12px;
+	line-height: 18px;
 }
 
 

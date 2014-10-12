@@ -37,8 +37,6 @@ $(window).on('load', function() {
         // Remove all the code
         markdown = markdown.replace(/```[^`]*```/g, "");
 
-        console.log(markdown);
-
         // Slide numeration start from 1
         var slideNumber = 1;
 

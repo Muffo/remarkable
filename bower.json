@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap": "~3.2.0",
     "remark": "~0.7.0",
-    "jquery.caret": "~1.5.2"
+    "jquery.caret": "~1.5.2",
+    "fontawesome": "~4.2.0"
   },
   "devDependencies": {}
 }

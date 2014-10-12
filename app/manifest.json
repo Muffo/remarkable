@@ -27,5 +27,6 @@
                 "scripts/chromereload.js"
             ]
         }
-    }
+    },
+    "offline_enabled": true
 }

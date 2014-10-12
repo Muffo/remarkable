@@ -6,6 +6,7 @@
 
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css">
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
         <!-- endbower -->
         <!-- endbuild -->
@@ -22,10 +23,10 @@
             </div>
 
             <button type="button" class="btn btn-default navbar-btn">
-                <span class="glyphicon glyphicon-floppy-disk"></span>
+                <i class="fa fa-floppy-o fa-lg"></i>
             </button>
             <button type="button" class="btn btn-default navbar-btn">
-                <span class="glyphicon glyphicon-share"></span>
+                <i class="fa fa-download fa-lg"></i>
             </button>
 
             <div class="btn-group">
@@ -43,14 +44,13 @@
                 <span class="glyphicon glyphicon-fullscreen"></span>
             </button>
             <button type="button" class="btn btn-info navbar-btn navbar-right">
-                <span class="glyphicon glyphicon-question-sign"></span>
+                <i class="fa fa-question fa-lg"></i>
             </button>
             
         </div>
     
         <div id="left-column">
-            <textarea id="markdown" class="full-height" placeholder="Markdown Code">
-            </textarea>
+            <textarea id="markdown" class="full-height" placeholder="Markdown Code"></textarea>
         </div>
         <div id="right-column" class="full-height">
             <iframe src="preview.html" id="preview-iframe" class="full-height"> </iframe>
