@@ -15,6 +15,10 @@ $(document).ready(function() {
 		editViewBtn: $('#edit-view-btn'),
 		slidesViewBtn: $('#slides-view-btn'),
 		presenterViewBtn: $('#presenter-view-btn'),
+		nextSlideBtn: $('#next-slide-btn'),
+		prevSlideBtn: $('#prev-slide-btn'),
+		githubBtn: $('#github-btn'),
+		helpBtn: $('#help-btn'),
 		
 		isMarkdownPreviewIframeLoaded: false,
 		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),
@@ -66,6 +70,24 @@ $(document).ready(function() {
 					action: 'viewPresenter',
 				});
 			});
+
+			this.nextSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'nextSlide',
+				});
+			});
+
+			this.prevSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'previousSlide',
+				});
+			});
+
+			this.githubBtn.on('click', function(e) {
+				window.open('https://github.com/Muffo/remarkable');
+			});
+
+
 
 		},
 	

@@ -73,6 +73,12 @@ $(window).on('load', function() {
                     });
                     slideshow.gotoSlide(slideNumber);
                 }
+                else if (request.action === 'nextSlide') {
+                    slideshow.gotoNextSlide();
+                }
+                else if (request.action === 'previousSlide') {
+                    slideshow.gotoPreviousSlide();
+                }
                 else if (request.action === 'viewSlides') {
                     if (body.hasClass('remark-presenter-mode')) {
                         slideshow.togglePresenterMode();
