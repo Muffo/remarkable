@@ -15,8 +15,9 @@ $(document).ready(function() {
 		editViewBtn: $('#edit-view-btn'),
 		slidesViewBtn: $('#slides-view-btn'),
 		presenterViewBtn: $('#presenter-view-btn'),
-		nextSlideBtn: $('#next-slide-btn'),
+		firstSlideBtn: $('#first-slide-btn'),
 		prevSlideBtn: $('#prev-slide-btn'),
+		nextSlideBtn: $('#next-slide-btn'),
 		githubBtn: $('#github-btn'),
 		helpBtn: $('#help-btn'),
 		
@@ -71,15 +72,21 @@ $(document).ready(function() {
 				});
 			});
 
-			this.nextSlideBtn.on('click', function(e) {
+			this.firstSlideBtn.on('click', function(e) {
 				app.postMessage({
-					action: 'nextSlide',
+					action: 'firstSlide',
 				});
 			});
 
 			this.prevSlideBtn.on('click', function(e) {
 				app.postMessage({
 					action: 'previousSlide',
+				});
+			});
+
+			this.nextSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'nextSlide',
 				});
 			});
 
