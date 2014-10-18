@@ -6,8 +6,9 @@
 
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
-        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css">
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/chardin.js/chardinjs.css" />
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -20,7 +21,8 @@
         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-static-top">
             
-            <a id="start-btn" class="navbar-brand" data-toggle="modal" data-target="#start-page">
+            <a id="start-btn" class="navbar-brand" data-toggle="modal" data-target="#start-page"
+                data-intro="Start page" data-position="bottom">
                 <img src="images/icon-32.png" class="icon-32" />
                 Remarkable
             </a>
@@ -34,7 +36,8 @@
             </button>
             -->
             <span class="nav-center">
-                <div class="btn-group" style="margin-right: 20px;">
+                <div class="btn-group" style="margin-right: 20px;" 
+                    data-intro="View mode:<br/>&middot; Edit<br/>&middot; Slide<br/>&middot; Presenter" data-position="bottom">
                     <button type="button" id="edit-view-btn" class="btn btn-default navbar-btn view-btn active">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
@@ -45,7 +48,8 @@
                         <span class="glyphicon glyphicon-comment"></span>
                     </button>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group"
+                    data-intro="Slide navigation" data-position="bottom">
                     <button type="button" id="first-slide-btn" class="btn btn-default navbar-btn">
                         <i class="fa fa-step-backward fa-lg"></i>
                     </button>
@@ -63,7 +67,8 @@
             </button>
             -->
             <span class="pull-right">
-                <button type="button" id="github-btn" class="btn btn-success navbar-btn">
+                <button type="button" id="github-btn" class="btn btn-success navbar-btn"
+                    data-intro="Fork me on Github" data-position="bottom">
                     <i class="fa fa-github fa-lg"></i>
                 </button>
                 <button type="button" id="help-btn" class="btn btn-info navbar-btn">
@@ -118,6 +123,7 @@
         <script src="bower_components/jquery/dist/jquery.js"></script>
         <script src="bower_components/jquery.caret/dist/jquery.caret-1.5.2.js"></script>       
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/chardin.js/chardinjs.js"></script>
         <script src="bower_components/remark/out/remark.js"></script>
         <!-- endbower -->
         <!-- endbuild -->

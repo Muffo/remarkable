@@ -96,6 +96,10 @@ $(document).ready(function() {
 				});
 			});
 
+			this.helpBtn.on('click', function(e) {
+				$('body').chardinJs('start');
+			});
+
 			this.githubBtn.on('click', function(e) {
 				window.open('https://github.com/Muffo/remarkable');
 			});
