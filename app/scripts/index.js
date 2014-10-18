@@ -15,9 +15,20 @@ $(document).ready(function() {
 		editViewBtn: $('#edit-view-btn'),
 		slidesViewBtn: $('#slides-view-btn'),
 		presenterViewBtn: $('#presenter-view-btn'),
+		firstSlideBtn: $('#first-slide-btn'),
+		prevSlideBtn: $('#prev-slide-btn'),
+		nextSlideBtn: $('#next-slide-btn'),
+		githubBtn: $('#github-btn'),
+		helpBtn: $('#help-btn'),
+
+		// Start page elements
+		startPage: $('#start-page'),
+		loadTemplateBtn: $('#load-template-btn'),
+		loadSampleBtn: $('#load-sample-btn'),
+		linkedinBtn: $('#linkedin-btn'),
 		
 		isMarkdownPreviewIframeLoaded: false,
-		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),
+		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),		
 	
 		init: function() {
 			editor.init();
@@ -65,6 +76,46 @@ $(document).ready(function() {
 				app.postMessage({
 					action: 'viewPresenter',
 				});
+			});
+
+			this.firstSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'firstSlide',
+				});
+			});
+
+			this.prevSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'previousSlide',
+				});
+			});
+
+			this.nextSlideBtn.on('click', function(e) {
+				app.postMessage({
+					action: 'nextSlide',
+				});
+			});
+
+			this.helpBtn.on('click', function(e) {
+				$('body').chardinJs('start');
+			});
+
+			this.githubBtn.on('click', function(e) {
+				window.open('https://github.com/Muffo/remarkable');
+			});
+
+			this.loadTemplateBtn.on('click', function(e) {
+				app.startPage.modal('hide');
+				editor.setMarkdown(samples.templatePresentation);
+			});
+
+			this.loadSampleBtn.on('click', function(e) {
+				app.startPage.modal('hide');
+				editor.setMarkdown(samples.remarkPresentation);
+			});
+
+			this.linkedinBtn.on('click', function(e) {
+				window.open('https://www.linkedin.com/in/andreagrandi87');
 			});
 
 		},
