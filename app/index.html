@@ -20,8 +20,8 @@
         <!-- Fixed navbar -->
         <div class="navbar navbar-default navbar-static-top">
             
-            <a id="home-btn" class="navbar-brand" href="#">
-                <img src="images/icon-32.png" style="margin: -8px 10px 0px;" />
+            <a id="start-btn" class="navbar-brand" data-toggle="modal" data-target="#start-page">
+                <img src="images/icon-32.png" class="icon-32" />
                 Remarkable
             </a>
             
@@ -79,6 +79,39 @@
         <div id="right-column" class="full-height" style="width:50%;">
             <iframe src="preview.html" id="preview-iframe" class="full-height"> </iframe>
         </div>
+
+        <!-- Start page -->
+        <div class="modal fade" id="start-page" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <h3 class="modal-title" id="readabilityHelpTitle">
+                            <img src="images/icon-32.png" class="icon-32"/>
+                            Remarkable
+                            <span style="font-size: 70%;margin-left: 20px;"> 
+                                Markdown Presentation Editor
+                            </span>
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <button type="button" id="load-template-btn" class="btn btn-success">
+                            Load template presentation
+                        </button>
+                        <button type="button" id="load-sample-btn" class="btn btn-success">
+                            Load sample presentation
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        Remarkable - by <a id="linkedin-btn" href="#"> Andrea Grandi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->

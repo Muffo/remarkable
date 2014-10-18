@@ -20,9 +20,15 @@ $(document).ready(function() {
 		nextSlideBtn: $('#next-slide-btn'),
 		githubBtn: $('#github-btn'),
 		helpBtn: $('#help-btn'),
+
+		// Start page elements
+		startPage: $('#start-page'),
+		loadTemplateBtn: $('#load-template-btn'),
+		loadSampleBtn: $('#load-sample-btn'),
+		linkedinBtn: $('#linkedin-btn'),
 		
 		isMarkdownPreviewIframeLoaded: false,
-		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),
+		markdownPreviewIframeLoadEventCallbacks: $.Callbacks(),		
 	
 		init: function() {
 			editor.init();
@@ -94,7 +100,19 @@ $(document).ready(function() {
 				window.open('https://github.com/Muffo/remarkable');
 			});
 
+			this.loadTemplateBtn.on('click', function(e) {
+				app.startPage.modal('hide');
+				editor.setMarkdown(samples.templatePresentation);
+			});
 
+			this.loadSampleBtn.on('click', function(e) {
+				app.startPage.modal('hide');
+				editor.setMarkdown(samples.remarkPresentation);
+			});
+
+			this.linkedinBtn.on('click', function(e) {
+				window.open('https://www.linkedin.com/in/andreagrandi87');
+			});
 
 		},
 	

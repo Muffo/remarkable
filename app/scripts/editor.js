@@ -97,6 +97,11 @@ $(document).ready(function() {
 			});
 		},
 
+		setMarkdown: function(markdown) {
+			this.markdownSource.val(markdown);
+			this.processMarkdown();
+		},
+
 		// Process the Markdown code and update the preview
 		processMarkdown: function() {
 			var markdown = this.markdownSource.val();
