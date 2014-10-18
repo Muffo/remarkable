@@ -63,14 +63,18 @@ $(window).on('load', function() {
             var request = e.originalEvent.data;
             if (request.hasOwnProperty('action')) {
                 if (request.action === 'updateMarkdownPreview') {
+
                     var markdown = request.markdown;
                     var caretPosition = request.caretPosition;
+                    var createPresentation = request.createPresentation;
                     var slideNumber = calcSlideNumber(markdown, caretPosition);
                    
-                    removePreview();
-                    slideshow = remark.create({
-                        source: markdown
-                    });
+                    if (createPresentation) {
+                        removePreview();
+                        slideshow = remark.create({
+                            source: markdown
+                        });
+                    } 
                     slideshow.gotoSlide(slideNumber);
                 }
                 else if (request.action === 'firstSlide') {

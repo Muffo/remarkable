@@ -157,22 +157,35 @@ $(document).ready(function() {
 		updateTimeout: null,
 
 		// Update the preview panel with new markdown
-		updateMarkdownPreview: function(markdown, caretPosition) {
+		updateMarkdownPreview: function(markdown, caretPosition, markdownHasChanged) {
+
+			// The user is also typing and not only moving the caret
+			var userIsTyping = (this.updateTimeout !== null);
+			var createPresentation = (userIsTyping || markdownHasChanged);
 
 			// Remove the previous request of update
-			if (this.updateTimeout !== null) {
+			if (userIsTyping) {
 				clearTimeout(this.updateTimeout)
+				this.updateTimeout = null;
 			}
+
 			var request = {
 				action: 'updateMarkdownPreview',
 				caretPosition: caretPosition,
-				markdown: markdown
+				markdown: markdown,
+				createPresentation: createPresentation 
 			}
 
-			// Schedule the next update
-			this.updateTimeout = setTimeout(function() {
+			if (createPresentation) {
+				// Schedule the next update
+				this.updateTimeout = setTimeout(function() {
+					app.postMessage(request);
+					app.updateTimeout = null;
+				}, 200);
+			}
+			else {
 				app.postMessage(request);
-			}, 200);
+			}
 		},
 	
 		updateMarkdownPreviewIframeHeight: function(height) {

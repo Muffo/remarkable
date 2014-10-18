@@ -8,19 +8,12 @@ $(document).ready(function() {
 		
 		// Editor variables
 		fitHeightElements: $('.full-height'),
-		// wrappersMargin: $('#left-column > .wrapper:first').outerHeight(true) - $('#left-column > .wrapper:first').height(),
-		// markdownConverter: new Showdown.converter(),
 		columns: $('#left-column, #right-column'),
-		markdownSource: $('#markdown'),
+		markdownTxt: $('#markdown'),
 		markdownPreview: $('#preview'),
 		markdownTargets: $('#preview'),
 		markdownTargetsTriggers: $('.buttons-container .switch'),
 		topPanel: $('.navbar'),
-		//topPanelsTriggers: $('#left-column .buttons-container .toppanel'),
-		//quickReferencePreText: $('#quick-reference pre'),
-		//featuresTriggers: $('.buttons-container .feature'),
-		//wordCountContainers: $('.word-count'),
-		//isAutoScrolling: false,
 		isFullscreen: false,
 		
 		// Initiate editor
@@ -39,26 +32,23 @@ $(document).ready(function() {
 			$(window).on('resize', function() {
 				editor.fitHeight();
 			});
-			this.markdownSource.on({
+			this.markdownTxt.on({
 				keydown: function(e) {
 					if (e.keyCode === 9) {
 						editor.handleTabKeyPress(e);
 					}
 				},
-				'keyup change': function() {
-					editor.markdownSource.trigger('change.editor');
+				'keydown keyup change click focus': function() {
+					editor.markdownTxt.trigger('change.editor');
 				},
 				'cut paste drop': function() {
 					setTimeout(function() {
-						editor.markdownSource.trigger('change.editor');
+						editor.markdownTxt.trigger('change.editor');
 					}, 0);
-				},
-				'keydown click focus': function() {
-					editor.markdownSource.trigger('change.editor');
 				},
 				'change.editor': function() {
 					editor.processMarkdown();
-					editor.save('markdown', editor.markdownSource.val());
+					editor.save('markdown', editor.markdownTxt.val());
 				},
 			});
 			this.markdownTargetsTriggers.on('click', function(e) {
@@ -85,10 +75,10 @@ $(document).ready(function() {
 		restoreState: function(c) {
 			app.restoreState(function(restoredItems) {
 				if (restoredItems.markdown) {
-					editor.markdownSource.val(restoredItems.markdown);
+					editor.markdownTxt.val(restoredItems.markdown);
 				}
 				else {
-					editor.markdownSource.val(samples.remarkPresentation);
+					editor.markdownTxt.val(samples.remarkPresentation);
 				}
 				if (restoredItems.isFullscreen === 'y') {
 					editor.toggleFeature('fullscreen');
@@ -98,37 +88,41 @@ $(document).ready(function() {
 		},
 
 		setMarkdown: function(markdown) {
-			this.markdownSource.val(markdown);
+			this.markdownTxt.val(markdown);
 			this.processMarkdown();
 		},
 
+		// Keep track of the markdown that is currently shown in the preview
+		markdownSourcePreview: null,
+
 		// Process the Markdown code and update the preview
 		processMarkdown: function() {
-			var markdown = this.markdownSource.val();
-
-			// Space for other operations on the MD before updating the preview
-			var caretPosition = editor.markdownSource.caret();
-			app.updateMarkdownPreview(markdown, caretPosition);
+			var markdown = this.markdownTxt.val();
+			var caretPosition = editor.markdownTxt.caret();
+			var markdownHasChanged = (markdown !== this.markdownSourcePreview);
+			
+			this.markdownSourcePreview = markdown;
+			app.updateMarkdownPreview(markdown, caretPosition, markdownHasChanged);
 			this.markdownPreview.trigger('updated.editor');
 		},
 
 		// Programmatically add Markdown text to the textarea
 		// position = { start: Number, end: Number }
-		addToMarkdownSource: function(markdown, position) {
-			var markdownSourceValue = this.markdownSource.val();
-			var newMarkdownSourceValue = null;
+		addToMarkdownTxt: function(markdown, position) {
+			var markdownTxtValue = this.markdownTxt.val();
+			var newMarkdownTxtValue = null;
 			if (typeof(position) === 'undefined') { // Add text at the end
-				newMarkdownSourceValue =
-					(markdownSourceValue.length? markdownSourceValue + '\n\n' : '') +
+				newMarkdownTxtValue =
+					(markdownTxtValue.length? markdownTxtValue + '\n\n' : '') +
 					markdown;
 			} else { // Add text at a given position
-				newMarkdownSourceValue =
-					markdownSourceValue.substring(0, position.start) +
+				newMarkdownTxtValue =
+					markdownTxtValue.substring(0, position.start) +
 					markdown +
-					markdownSourceValue.substring(position.end);
+					markdownTxtValue.substring(position.end);
 			}
-			this.markdownSource
-				.val(newMarkdownSourceValue)
+			this.markdownTxt
+				.val(newMarkdownTxtValue)
 				.trigger('change.editor');
 		},
 
@@ -182,16 +176,16 @@ $(document).ready(function() {
 		// Insert a tab character when the tab key is pressed (instead of focusing the next form element)
 		// Doesn't work in IE<9
 		handleTabKeyPress: function(e) {
-			var markdownSourceElement = this.markdownSource[0],
+			var markdownTxtElement = this.markdownTxt[0],
 				tabInsertPosition = {
-					start: markdownSourceElement.selectionStart,
-					end: markdownSourceElement.selectionEnd
+					start: markdownTxtElement.selectionStart,
+					end: markdownTxtElement.selectionEnd
 				};
 			if (typeof(tabInsertPosition.start) === 'number' && typeof(tabInsertPosition.end) === 'number') {
 				e.preventDefault();
-				this.addToMarkdownSource('\t', tabInsertPosition);
+				this.addToMarkdownTxt('\t', tabInsertPosition);
 				var cursorPosition = tabInsertPosition.start + 1;
-				markdownSourceElement.setSelectionRange(cursorPosition, cursorPosition);
+				markdownTxtElement.setSelectionRange(cursorPosition, cursorPosition);
 			}
 		},
 
