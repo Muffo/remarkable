@@ -6,6 +6,47 @@ $(document).ready(function() {
 
     samples = {
 
+        templatePresentation: (function () {/*class: center, middle, inverse
+#The title
+---
+layout: true
+.footnote[Your Name - 2014]
+???
+This will appear in all the slides
+---
+.left-column[
+## First slide
+]
+.right-column[
+Slide content
+  
+* Here you can type wherever you want using Markdown
+]
+---
+.left-column[
+  ## First slide
+  ## Second slide
+]
+.right-column[
+  Let's add some code
+
+  ```javascript
+  var button = document.querySelector( "button" );
+ 
+  // If a user clicks on it, say hello!
+  button.addEventListener( "click", function( e ) {
+    alert( "Hello world!" );
+  }, false);
+  ```
+]
+---
+layout: false
+class: center, middle, inverse
+#The end
+.footnote[Created using with Remarkable]
+    */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1],
+    
+
         remarkPresentation: (function () {/*name: inverse
 layout: true
 class: center, middle, inverse
