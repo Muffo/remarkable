@@ -161,7 +161,7 @@ $(document).ready(function() {
 
 			// The user is also typing and not only moving the caret
 			var userIsTyping = (this.updateTimeout !== null);
-			var createPresentation = (userIsTyping || markdownHasChanged);
+			var createSlideshow = (userIsTyping || markdownHasChanged);
 
 			// Remove the previous request of update
 			if (userIsTyping) {
@@ -173,10 +173,10 @@ $(document).ready(function() {
 				action: 'updateMarkdownPreview',
 				caretPosition: caretPosition,
 				markdown: markdown,
-				createPresentation: createPresentation 
+				createSlideshow: createSlideshow 
 			}
 
-			if (createPresentation) {
+			if (createSlideshow) {
 				// Schedule the next update
 				this.updateTimeout = setTimeout(function() {
 					app.postMessage(request);
