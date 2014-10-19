@@ -2,6 +2,8 @@
 
 Remarkable is a **Markdown slideshow editor** based on [Remark](http://remarkjs.com/).
 
+![Remarkable screenshot](https://raw.githubusercontent.com/Muffo/remarkable/develop/assets/screenshot.png)
+
 ## Features
 
 - [x] **Live preview**: edit the markdown and see a preview of your slideshow in real-time
