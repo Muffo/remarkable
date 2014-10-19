@@ -66,10 +66,10 @@ $(window).on('load', function() {
 
                     var markdown = request.markdown;
                     var caretPosition = request.caretPosition;
-                    var createPresentation = request.createPresentation;
+                    var createSlideshow = request.createSlideshow;
                     var slideNumber = calcSlideNumber(markdown, caretPosition);
                    
-                    if (createPresentation) {
+                    if (createSlideshow) {
                         removePreview();
                         slideshow = remark.create({
                             source: markdown
