@@ -274,19 +274,19 @@ Using [GFM](http://github.github.com/github-flavored-markdown/) fenced code bloc
 
 .pull-left[
 
-<pre><code>```javascript
+```javascript
 function add(a, b)
   return a + b
 end
-```</code></pre>
+```
 ]
 .pull-right[
 
-<pre><code>```ruby
+```ruby
 def add(a, b)
   a + b
 end
-```</code></pre>
+```
 ]
 
 A number of highlighting [styles](https://github.com/gnab/remark/wiki/Configuration#highlighting) are available, including several well-known themes from different editors and IDEs.

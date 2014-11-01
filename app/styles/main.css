@@ -41,6 +41,7 @@ body {
 #markdown,
 #preview-iframe {
 	display: block;
+	position:relative;
 	width: 100%;
 	resize: none;
 	margin: 0;
@@ -51,13 +52,28 @@ body {
 	tab-size: 4;
 }
 
-#markdown {
-	padding: 15px;
-	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;;
+
+/* Code Mirror  styles */
+
+.CodeMirror {
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 	font-size: 12px;
-	line-height: 18px;
+	line-height: 18px !important;
 }
 
+.cm-header-1 {
+	font-size: 120%;
+}
+
+.cm-header-2 {
+	font-size: 110%;
+}
+
+.CodeMirror-matchingbracket {
+	color: #a16a94 !important;
+	text-decoration: none;
+	font-weight: bold;
+}
 
 
 #left-column #markdown:focus,
