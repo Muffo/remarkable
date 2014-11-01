@@ -67,7 +67,11 @@ body {
 }
 
 .cm-header-1 {
-	font-size: 115%;
+	font-size: 120%;
+}
+
+.cm-header-2 {
+	font-size: 110%;
 }
 
 

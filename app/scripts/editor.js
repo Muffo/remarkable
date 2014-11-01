@@ -11,7 +11,6 @@ $(document).ready(function() {
 		columns: $('#left-column, #right-column'),
 		markdownTxt: $('#markdown'),
 		markdownPreview: $('#preview'),
-		markdownTargets: $('#preview'),
 		topPanel: $('.navbar'),
 		isFullscreen: false,
 		codemirror: null,
@@ -24,7 +23,7 @@ $(document).ready(function() {
 				lineNumbers: true,
 				matchBrackets: true,
 				lineWrapping: true,
-				theme: '3024-day',
+				theme: '3024-day'
     		});
 
 			this.initBindings();
@@ -42,31 +41,15 @@ $(document).ready(function() {
 			$(window).on('resize', function() {
 				editor.fitHeight();
 			});
-			this.markdownTxt.on({
-				keydown: function(e) {
-					if (e.keyCode === 9) {
-						editor.handleTabKeyPress(e);
-					}
-				},
-				'keydown keyup change click focus': function() {
-					editor.markdownTxt.trigger('change.editor');
-				},
-				'cut paste drop': function() {
-					setTimeout(function() {
-						editor.markdownTxt.trigger('change.editor');
-					}, 0);
-				},
-				'change.editor': function() {
-					editor.processMarkdown();
-					editor.save('markdown', editor.codemirror.getValue());
-				},
+
+			this.codemirror.on('change', function() {
+				editor.processMarkdown();
+				editor.save('markdown', editor.codemirror.getValue());
 			});
 
-			this.codemirror.on({
-				'change cursorActivity': function(cm, changeObj) {
-					editor.processMarkdown();
-					editor.save('markdown', editor.codemirror.getValue());
-				}
+			this.codemirror.on('cursorActivity', function() {
+				editor.processMarkdown();
+				editor.save('markdown', editor.codemirror.getValue());
 			});
 		},
 
@@ -112,11 +95,12 @@ $(document).ready(function() {
 		// Process the Markdown code and update the preview
 		processMarkdown: function() {
 			var markdown = this.codemirror.getValue();
-			var caretPosition = editor.markdownTxt.caret();
+			var cursorPosition = this.codemirror.getCursor()
+			var cursorIndex = this.codemirror.indexFromPos(cursorPosition);
 			var markdownHasChanged = (markdown !== this.markdownSourcePreview);
 			
 			this.markdownSourcePreview = markdown;
-			app.updateMarkdownPreview(markdown, caretPosition, markdownHasChanged);
+			app.updateMarkdownPreview(markdown, cursorIndex, markdownHasChanged);
 			this.markdownPreview.trigger('updated.editor');
 		},
 
@@ -139,70 +123,5 @@ $(document).ready(function() {
 				.val(newMarkdownTxtValue)
 				.trigger('change.editor');
 		},
-
-		// Toggle editor feature
-		toggleFeature: function(which, featureData) {
-			var featureTrigger = this.featuresTriggers.filter('[data-feature='+ which +']');
-			switch (which) {
-				case 'auto-scroll':
-					this.toggleAutoScroll();
-					break;
-				case 'fullscreen':
-					this.toggleFullscreen(featureData);
-					break;
-			}
-			featureTrigger.toggleClass('active');
-		},
-
-
-		toggleFullscreen: function(featureData) {
-			var toFocus = featureData && featureData.tofocus;
-			this.isFullscreen = !this.isFullscreen;
-			$(document.body).toggleClass('fullscreen');
-			if (toFocus) {
-				this.switchToPanel(toFocus);
-			}
-			// Exit fullscreen
-			if (!this.isFullscreen) {
-				this.columns.show(); // Make sure all columns are visible when exiting fullscreen
-				var activeMarkdownTargetsTriggersSwichtoValue = this.markdownTargetsTriggers.filter('.active').first().data('switchto');
-				// Force one of the right panel's elements to be active if not already when exiting fullscreen
-				if (activeMarkdownTargetsTriggersSwichtoValue === 'markdown') {
-					this.switchToPanel('preview');
-				}
-				// Auto-scroll when exiting fullscreen and 'preview' is already active since it changes width
-				if (this.isAutoScrolling && activeMarkdownTargetsTriggersSwichtoValue === 'preview') {
-					this.markdownPreview.trigger('updated.editor');
-				}
-				$(document).off('keyup.fullscreen');
-			// Enter fullscreen
-			} else {
-				this.closeTopPanels();
-				$(document).on('keyup.fullscreen', function(e) { // Exit fullscreen when the escape key is pressed
-					if (e.keyCode === 27) {
-						editor.featuresTriggers.filter('[data-feature=fullscreen]').last().trigger('click');
-					}
-				});
-			}
-			this.save('isFullscreen', this.isFullscreen? 'y' : 'n');
-		},
-
-		// Insert a tab character when the tab key is pressed (instead of focusing the next form element)
-		// Doesn't work in IE<9
-		handleTabKeyPress: function(e) {
-			var markdownTxtElement = this.markdownTxt[0],
-				tabInsertPosition = {
-					start: markdownTxtElement.selectionStart,
-					end: markdownTxtElement.selectionEnd
-				};
-			if (typeof(tabInsertPosition.start) === 'number' && typeof(tabInsertPosition.end) === 'number') {
-				e.preventDefault();
-				this.addToMarkdownTxt('\t', tabInsertPosition);
-				var cursorPosition = tabInsertPosition.start + 1;
-				markdownTxtElement.setSelectionRange(cursorPosition, cursorPosition);
-			}
-		},
-
 	};
-	
 });
