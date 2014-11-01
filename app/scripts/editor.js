@@ -1,4 +1,4 @@
-/*global $:false, editor:true, app:false, samples:false*/
+/*global $:false, editor:true, app:false, samples:false, CodeMirror:false*/
 
 // 'use strict';
   
@@ -12,12 +12,21 @@ $(document).ready(function() {
 		markdownTxt: $('#markdown'),
 		markdownPreview: $('#preview'),
 		markdownTargets: $('#preview'),
-		markdownTargetsTriggers: $('.buttons-container .switch'),
 		topPanel: $('.navbar'),
 		isFullscreen: false,
+		codemirror: null,
 		
 		// Initiate editor
 		init: function() {
+			this.codemirror = CodeMirror.fromTextArea(
+				document.getElementById('markdown'), {
+      			mode: 'markdown',
+				lineNumbers: true,
+				matchBrackets: true,
+				lineWrapping: true,
+				theme: '3024-day',
+    		});
+
 			this.initBindings();
 			this.fitHeight();
 			this.restoreState(function() {
@@ -25,6 +34,7 @@ $(document).ready(function() {
 				editor.onloadEffect(1);
 				this.fitHeight();
 			});
+
 		},
 
 		// Handle events on several DOM elements
@@ -48,12 +58,15 @@ $(document).ready(function() {
 				},
 				'change.editor': function() {
 					editor.processMarkdown();
-					editor.save('markdown', editor.markdownTxt.val());
+					editor.save('markdown', editor.codemirror.getValue());
 				},
 			});
-			this.markdownTargetsTriggers.on('click', function(e) {
-				e.preventDefault();
-				editor.switchToPanel($(this).data('switchto'));
+
+			this.codemirror.on({
+				'change cursorActivity': function(cm, changeObj) {
+					editor.processMarkdown();
+					editor.save('markdown', editor.codemirror.getValue());
+				}
 			});
 		},
 
@@ -64,6 +77,7 @@ $(document).ready(function() {
 				var t = $(this);
 				t.css({ height: newHeight +'px' });
 			});
+			this.codemirror.setSize(null, newHeight);
 		},
 
 		// Save a key/value pair in the app storage (either Markdown text or enabled features)
@@ -75,10 +89,10 @@ $(document).ready(function() {
 		restoreState: function(c) {
 			app.restoreState(function(restoredItems) {
 				if (restoredItems.markdown) {
-					editor.markdownTxt.val(restoredItems.markdown);
+					editor.codemirror.setValue(restoredItems.markdown);
 				}
 				else {
-					editor.markdownTxt.val(samples.remarkPresentation);
+					editor.codemirror.setValue(samples.remarkPresentation);
 				}
 				if (restoredItems.isFullscreen === 'y') {
 					editor.toggleFeature('fullscreen');
@@ -88,7 +102,7 @@ $(document).ready(function() {
 		},
 
 		setMarkdown: function(markdown) {
-			this.markdownTxt.val(markdown);
+			this.codemirror.setValue(markdown);
 			this.processMarkdown();
 		},
 
@@ -97,7 +111,7 @@ $(document).ready(function() {
 
 		// Process the Markdown code and update the preview
 		processMarkdown: function() {
-			var markdown = this.markdownTxt.val();
+			var markdown = this.codemirror.getValue();
 			var caretPosition = editor.markdownTxt.caret();
 			var markdownHasChanged = (markdown !== this.markdownSourcePreview);
 			
@@ -109,7 +123,7 @@ $(document).ready(function() {
 		// Programmatically add Markdown text to the textarea
 		// position = { start: Number, end: Number }
 		addToMarkdownTxt: function(markdown, position) {
-			var markdownTxtValue = this.markdownTxt.val();
+			var markdownTxtValue = this.codemirror.getValue();
 			var newMarkdownTxtValue = null;
 			if (typeof(position) === 'undefined') { // Add text at the end
 				newMarkdownTxtValue =

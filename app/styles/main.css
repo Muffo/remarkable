@@ -41,6 +41,7 @@ body {
 #markdown,
 #preview-iframe {
 	display: block;
+	position:relative;
 	width: 100%;
 	resize: none;
 	margin: 0;
@@ -58,6 +59,16 @@ body {
 	line-height: 18px;
 }
 
+
+.CodeMirror {
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	font-size: 12px;
+	line-height: 18px !important;
+}
+
+.cm-header-1 {
+	font-size: 115%;
+}
 
 
 #left-column #markdown:focus,

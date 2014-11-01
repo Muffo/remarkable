@@ -8,6 +8,8 @@
         <!-- bower:css -->
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css" />
+        <link rel="stylesheet" href="bower_components/codemirror/theme/3024-day.css" />
         <link rel="stylesheet" href="bower_components/chardin.js/chardinjs.css" />
         <!-- endbower -->
         <!-- endbuild -->
@@ -79,7 +81,7 @@
         </div>
     
         <div id="left-column" style="width:50%;">
-            <textarea id="markdown" class="full-height" placeholder="Markdown Code"></textarea>
+            <textarea id="markdown" placeholder="Markdown Code"></textarea>
         </div>
         <div id="right-column" class="full-height" style="width:50%;">
             <iframe src="preview.html" id="preview-iframe" class="full-height"> </iframe>
@@ -131,6 +133,8 @@
         <script src="bower_components/jquery.caret/dist/jquery.caret-1.5.2.js"></script>       
         <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script src="bower_components/chardin.js/chardinjs.js"></script>
+        <script src="bower_components/codemirror/lib/codemirror.js"></script>
+        <script src="bower_components/codemirror/mode/markdown/markdown.js"></script>
         <script src="bower_components/remark/out/remark.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
