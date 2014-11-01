@@ -52,13 +52,8 @@ body {
 	tab-size: 4;
 }
 
-#markdown {
-	padding: 15px;
-	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;;
-	font-size: 12px;
-	line-height: 18px;
-}
 
+/* Code Mirror  styles */
 
 .CodeMirror {
 	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
@@ -72,6 +67,12 @@ body {
 
 .cm-header-2 {
 	font-size: 110%;
+}
+
+.CodeMirror-matchingbracket {
+	color: #a16a94 !important;
+	text-decoration: none;
+	font-weight: bold;
 }
 
 

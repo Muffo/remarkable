@@ -23,7 +23,8 @@ $(document).ready(function() {
 				lineNumbers: true,
 				matchBrackets: true,
 				lineWrapping: true,
-				theme: '3024-day'
+				theme: '3024-day',
+				extraKeys: {"Enter": "newlineAndIndentContinueMarkdownList"}
     		});
 
 			this.initBindings();
@@ -42,6 +43,7 @@ $(document).ready(function() {
 				editor.fitHeight();
 			});
 
+			/* The events can be optimized */
 			this.codemirror.on('change', function() {
 				editor.processMarkdown();
 				editor.save('markdown', editor.codemirror.getValue());
